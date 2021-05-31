@@ -24,6 +24,11 @@ def home(request):
 
 
 def payments(request):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
+
     if request.method == 'POST':
         charge = stripe.Charge.create(
             amount=500,
@@ -40,6 +45,28 @@ def delete(request,list_id):
     item.delete()
     messages.success(request,('Item is deleted!'))
     return redirect('home')
+
+
+def complete(request,list_id):
+    item = List.objects.get(pk=list_id)
+    item.completed = True
+    item.save()
+    return redirect('home')
+
+
+def uncomplete(request,list_id):
+    item = List.objects.get(pk=list_id)
+    item.completed = False
+    item.save()
+    return redirect('home')
+
+
+
+
+
+
+
+
 
 '''
 class HomePageView(TemplateView):

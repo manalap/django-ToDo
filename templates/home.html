@@ -19,13 +19,13 @@
             {% if items.completed %}
                  <tr class="table-success">
                    <td class="items_done">{{ items.item }}</td>
-                   <td>{{ items.completed }}</td>
-                     <td><a role="button" class="btn btn-danger" href="{% url 'delete' items.id %}">Delete</a></td>
+                   <td><a role="button" class="btn btn-success" href="{% url 'uncomplete' items.id %}">YES</a></td>
+                   <td><a role="button" class="btn btn-danger" href="{% url 'delete' items.id %}">Delete</a></td>
                 </tr>
             {% else %}
                 <tr>
                    <td>{{ items.item }}</td>
-                   <td>{{ items.completed }}</td>
+                    <td><a role="button" class="btn btn-warning" href="{% url 'complete' items.id %}">NO</a></td>
                    <td><a role="button" class="btn btn-danger" href="{% url 'delete' items.id %}">Delete</a></td>
                </tr>
             {% endif %}
